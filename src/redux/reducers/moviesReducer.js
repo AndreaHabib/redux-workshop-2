@@ -2,31 +2,30 @@ import {
   FETCH_MOVIES,
   START_FETCHING_MOVIES,
   END_FETCHING_MOVIES,
-} from "../actions/moviesActions";
+} from "../actions/movieActions";
 
 const initialState = {
   movies: [],
-  isFetching: true,
+  isFetchingMovies: true,
 };
 
 export const movieReducer = (state = initialState, action) => {
   switch (action.type) {
-    case START_FETCHING_MOVIES:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case END_FETCHING_MOVIES:
-      return {
-        ...state,
-        isFetching: false,
-      };
     case FETCH_MOVIES:
       return {
         ...state,
         movies: action.payload,
       };
-
+    case START_FETCHING_MOVIES:
+      return {
+        ...state,
+        isFetchingMovies: true,
+      };
+    case END_FETCHING_MOVIES:
+      return {
+        ...state,
+        isFetchingMovies: false,
+      };
     default:
       return state;
   }

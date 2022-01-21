@@ -2,9 +2,9 @@ import {
   FETCH_MOVIES,
   START_FETCHING_MOVIES,
   END_FETCHING_MOVIES,
-} from "./moviesActions";
+} from "./movieActions";
 
-export const getMovies = () => async (dispatch) => {
+export const getMoviesThunk = () => async (dispatch) => {
   try {
     dispatch({ type: START_FETCHING_MOVIES });
     const movies = await fetch("https://api.sampleapis.com/movies/animation");
