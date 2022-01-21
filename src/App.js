@@ -1,22 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovies } from "./redux/actions/moviesThunk";
 
 function App() {
+  const [movies, isFetching] = useSelector((state) => [
+    state.movies.movies,
+    state.movies.isFetching,
+  ]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMovies());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {!isFetching ? (
+          <p>
+            {movies.map((movie, index) => {
+              return <p key={index}>{movie.title}</p>;
+            })}
+          </p>
+        ) : (
+          <h1>Loading...</h1>
+        )}
       </header>
     </div>
   );
